@@ -1,8 +1,45 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Alertify" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.Alertify" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/app_color</item>
+        <item name="colorPrimaryVariant">@color/app_color</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/app_color</item>
+        <item name="colorSecondaryVariant">@color/app_color</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/app_color</item>
+        <!-- Customize your theme here. -->
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
+    <!--    style of dep-admin img update dialog-->
+    <style name="dep_admin_update_img_corners" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10dp</item>
+    </style>
+
+    <!--style of profile header-->
+    <style name="user_name_email">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!--    style of navigation drawer-->
+    <style name="navigation_style">
+        <item name="android:background">@color/white</item>
+        <item name="iconTint">@color/black</item>
+        <item name="itemTextColor">@color/black</item>
+    </style>
+
+    <!--    style of search view-->
+    <style name="search_view_style">
+        <item name="android:textColorHint">@color/hint_color</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:editTextColor">@color/black</item>
+        <item name="android:colorControlNormal">@color/hint_color</item>
+        <item name="android:textCursorDrawable">@drawable/cursor_shape</item>
     </style>
 
     <style name="Theme.Alertify" parent="Base.Theme.Alertify" />

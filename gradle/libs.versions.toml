@@ -1,21 +1,51 @@
 [versions]
 agp = "8.3.1"
+androidMapsUtils = "2.2.0"
+circleimageview = "3.1.0"
+clkprogress = "v1.0"
+dexter = "6.2.3"
+firebaseMessaging = "23.4.1"
+firebaseStorage = "20.2.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 appcompat = "1.6.1"
-material = "1.11.0"
+kotlinBom = "1.8.0"
+lottieVersion = "3.4.0"
+material = "1.9.0"
 activity = "1.8.0"
 constraintlayout = "2.1.4"
+googleServices = "4.3.15"
+firebaseDatabase = "20.2.2"
+firebaseAuth = "22.1.1"
+mpandroidchart = "v3.1.0"
+okhttp = "4.10.0"
+playServicesLocation = "21.0.1"
+playServicesMaps = "18.1.0"
 
 [libraries]
+android-maps-utils = { module = "com.google.maps.android:android-maps-utils", version.ref = "androidMapsUtils" }
+circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
+clkProgress = { module = "com.github.colakcode:clkProgress", version.ref = "clkprogress" }
+dexter = { module = "com.karumi:dexter", version.ref = "dexter" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebaseMessaging" }
+firebase-storage = { module = "com.google.firebase:firebase-storage", version.ref = "firebaseStorage" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlinBom" }
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottieVersion" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServices" }
+firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
+mp-android-chart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpandroidchart" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
+play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
