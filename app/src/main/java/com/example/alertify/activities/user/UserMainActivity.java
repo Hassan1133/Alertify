@@ -56,7 +56,7 @@ public class UserMainActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.drawer_layout);
+        setContentView(R.layout.user_drawer_layout);
         initialize(); // initialization method for initializing variables
     }
 

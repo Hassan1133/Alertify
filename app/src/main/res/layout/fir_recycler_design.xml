@@ -71,7 +71,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="5dp"
-            android:text="@string/police_station_fir"
+            android:text="@string/police_station"
             android:textColor="@color/black"
             android:textSize="12sp"
             />

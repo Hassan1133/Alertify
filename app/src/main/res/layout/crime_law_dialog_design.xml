@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_shape">
+
+    <ImageView
+        android:id="@+id/close_btn"
+        android:layout_width="20sp"
+        android:layout_height="20sp"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/close" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/sectionNumberLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/close_btn"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:hint="@string/enter_section_number_here"
+        android:textColorHint="@color/hint_color"
+        app:boxStrokeColor="@color/hint_color"
+        app:hintTextColor="@color/hint_color">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/sectionNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hint_color"
+            android:textCursorDrawable="@drawable/cursor_shape"
+            android:textSize="15sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/lawLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sectionNumberLayout"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:hint="@string/enter_law_here"
+        android:textColorHint="@color/hint_color"
+        app:boxStrokeColor="@color/hint_color"
+        app:hintTextColor="@color/hint_color">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/law"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hint_color"
+            android:textCursorDrawable="@drawable/cursor_shape"
+            android:textSize="15sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ProgressBar
+        android:id="@+id/law_dialog_progressbar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/lawLayout"
+        android:layout_centerHorizontal="true"
+        android:indeterminateTint="@color/app_color"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/addLawDetailBtn"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:layout_below="@id/law_dialog_progressbar"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/app_color"
+        android:text="@string/add_law_details"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:cornerRadius="5dp" />
+
+</RelativeLayout>

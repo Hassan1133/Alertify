@@ -71,4 +71,49 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="log_out">Log out</string>
     <string name="user_login">User Login</string>
+
+    <string-array name="status_array">
+        <item>All</item>
+        <item>Pending</item>
+        <item>In Process</item>
+        <item>Resolved</item>
+    </string-array>
+
+    <string-array name="calender_type">
+        <item>Date</item>
+        <item>Month</item>
+        <item>Year</item>
+    </string-array>
+
+    <string name="crimes">Crimes</string>
+    <string name="laws">Laws</string>
+    <string name="criminals">Criminals</string>
+    <string name="criminal_cnic">Criminal CNIC without dashes</string>
+    <string name="criminal_name">Criminal name</string>
+    <string name="add_criminal">Add Criminal</string>
+
+    <string name="enter_district_e_g_faisalabad">enter district e.g Faisalabad</string>
+    <string name="enter_police_station_name">enter police station name</string>
+    <string name="enter_number_of_fir">enter number of FIR</string>
+    <string name="add_fir_details">Add FIR Details</string>
+    <string name="select_investigation_status">Select investigation status</string>
+    <string name="directions">Directions</string>
+    <string name="user_name">User Name</string>
+    <string name="user_phone_no">User Phone No</string>
+    <string name="user_cnic">User CNIC</string>
+    <string name="request_datetime">Request DateTime</string>
+    <string name="request_police_station">Request Police Station</string>
+    <string name="user_email">User Email</string>
+    <string name="see_analytics">See Analytics</string>
+    <string name="date">Date</string>
+    <string name="calender_type">Calender Type</string>
+    <string name="select_complaint_status">Select Complaint Status</string>
+    <string name="analytics">Analytics</string>
+    <string name="law">Law</string>
+    <string name="enter_section_number_here">enter section number here</string>
+    <string name="add_law_details">Add Law Details</string>
+    <string name="enter_law_here">enter law here</string>
+    <string name="definition">Definition</string>
+    <string name="change_password">change password</string>
+    <string name="department_admin_login">Department Admin Login</string>
 </resources>

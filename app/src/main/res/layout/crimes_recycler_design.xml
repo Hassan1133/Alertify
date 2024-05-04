@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="10dp"
     android:layout_marginEnd="10dp"
+    android:clickable="true"
     android:elevation="4dp"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="10dp"
@@ -36,7 +37,7 @@
             android:textColor="@color/hint_color"
             android:layout_marginBottom="20dp"
             android:textSize="14sp"
-            />
+             />
 
     </RelativeLayout>
 

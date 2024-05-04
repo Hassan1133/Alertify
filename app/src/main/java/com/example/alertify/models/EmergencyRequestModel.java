@@ -1,6 +1,8 @@
 package com.example.alertify.models;
 
-public class EmergencyRequestModel {
+import java.io.Serializable;
+
+public class EmergencyRequestModel implements Serializable {
 
     private String requestId;
     private String requestStatus;
