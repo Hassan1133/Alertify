@@ -49,13 +49,18 @@ public class DepAdminEmergencyRequestsAdp extends RecyclerView.Adapter<DepAdminE
     public void onBindViewHolder(@NonNull DepAdminEmergencyRequestsAdp.Holder holder, int position) {
 
         EmergencyRequestModel emergencyRequestModel = emergencyRequestsList.get(position);
+
+        if (emergencyRequestModel != null) {
         usersRef.child(emergencyRequestModel.getUserId()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                holder.userName.setText(snapshot.child("name").getValue().toString());
-                holder.phoneNo.setText(snapshot.child("phoneNo").getValue().toString());
-                if (emergencyRequestModel.getRequestStatus().equals("unseen")) {
-                    holder.activeIcon.setVisibility(View.VISIBLE);
+
+                if (snapshot.exists()) {
+                    holder.userName.setText(snapshot.child("name").getValue().toString());
+                    holder.phoneNo.setText(snapshot.child("phoneNo").getValue().toString());
+                    if (emergencyRequestModel.getRequestStatus().equals("unseen")) {
+                        holder.activeIcon.setVisibility(View.VISIBLE);
+                    }
                 }
             }
 
@@ -64,7 +69,7 @@ public class DepAdminEmergencyRequestsAdp extends RecyclerView.Adapter<DepAdminE
                 Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

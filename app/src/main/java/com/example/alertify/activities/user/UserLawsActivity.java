@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.alertify.adapters.UserLawsAdp;
+import com.example.alertify.adapters.user.UserLawsAdp;
 import com.example.alertify.databinding.ActivityUserLawsBinding;
 import com.example.alertify.models.LawsModel;
 import com.google.firebase.database.DataSnapshot;

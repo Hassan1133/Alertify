@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.alertify.adapters.UserCriminalsAdp;
+import com.example.alertify.adapters.user.UserCriminalsAdp;
 import com.example.alertify.databinding.ActivityUserCriminalsBinding;
 import com.example.alertify.models.CriminalsModel;
 import com.google.firebase.database.DataSnapshot;

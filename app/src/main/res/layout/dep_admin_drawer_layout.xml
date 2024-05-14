@@ -17,7 +17,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/dep_admin_header"
-        app:menu="@menu/nav_menu"
+        app:menu="@menu/dep_admin_nav_menu"
         app:itemIconSize="17dp"
         app:itemIconTint="@color/black"
         style="@style/navigation_style"

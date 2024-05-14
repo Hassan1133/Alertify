@@ -245,7 +245,6 @@ public class DepAdminMainActivity extends AppCompatActivity implements View.OnCl
                         break;
 
                     case R.id.home:
-                        loadFragment(new DepAdminComplaintsFragment());
                         bottom_navigation.setSelectedItemId(R.id.complaints);
                         drawer.closeDrawer(GravityCompat.START);
                         break;
@@ -258,9 +257,6 @@ public class DepAdminMainActivity extends AppCompatActivity implements View.OnCl
 
     private void signOut() {
         FirebaseAuth.getInstance().signOut();
-
-        appSharedPreferences.put("depAdminLogin", false);
-
         appSharedPreferences.clear();
 
         Intent intent = new Intent(DepAdminMainActivity.this, DepAdminLoginActivity.class);

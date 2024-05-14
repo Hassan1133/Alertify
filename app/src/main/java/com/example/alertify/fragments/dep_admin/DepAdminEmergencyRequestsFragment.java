@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -33,8 +34,16 @@ public class DepAdminEmergencyRequestsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DepAdminEmergencyRequestsFragmentBinding.inflate(inflater, container, false);
-        init();
         return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (isAdded())
+        {
+            init();
+        }
     }
 
     private void init()
@@ -50,6 +59,11 @@ public class DepAdminEmergencyRequestsFragment extends Fragment {
 
     private void fetchData() {
 
+        if(!isAdded())
+        {
+            return;
+        }
+
         binding.emergencyProgressbar.setVisibility(View.VISIBLE);
         emergencyRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -58,7 +72,11 @@ public class DepAdminEmergencyRequestsFragment extends Fragment {
                 emergencyServiceList.clear();
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    emergencyServiceList.add(dataSnapshot.getValue(EmergencyRequestModel.class));
+                    EmergencyRequestModel emergencyRequestModel = dataSnapshot.getValue(EmergencyRequestModel.class);
+                    if(emergencyRequestModel != null)
+                    {
+                        emergencyServiceList.add(emergencyRequestModel);
+                    }
                 }
 
                 // Sort the list
@@ -77,6 +95,12 @@ public class DepAdminEmergencyRequestsFragment extends Fragment {
     }
 
     private void setDataToRecycler(List<EmergencyRequestModel> emergencyServices) {
+
+        if(!isAdded())
+        {
+            return;
+        }
+
         adp = new DepAdminEmergencyRequestsAdp(getActivity(), emergencyServices);
         binding.emergencyRecycler.setAdapter(adp);
     }

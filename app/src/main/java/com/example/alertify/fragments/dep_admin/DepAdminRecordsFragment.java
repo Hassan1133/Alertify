@@ -26,8 +26,16 @@ public class DepAdminRecordsFragment extends Fragment implements View.OnClickLis
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         binding = DepAdminRecordsFragmentBinding.inflate(inflater, container, false);
-        init();
         return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (isAdded())
+        {
+            init();
+        }
     }
 
     private void init() {

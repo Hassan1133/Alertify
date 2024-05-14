@@ -71,7 +71,7 @@ public class DepAdminComplaintsDetailsActivity extends AppCompatActivity impleme
         binding.detailsComplaintPoliceStation.setText(complaintModel.getPoliceStation());
         binding.detailsComplaintDateTime.setText(complaintModel.getComplaintDateTime());
         binding.complaintFeedback.setText(complaintModel.getFeedback());
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.status_array));
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.complaint_status_array));
         binding.status.setAdapter(adapter);
         binding.status.setText(complaintModel.getInvestigationStatus(), false);
 

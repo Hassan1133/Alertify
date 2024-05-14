@@ -93,7 +93,7 @@ public class DepAdminLawsActivity extends AppCompatActivity {
 
     private void createAddCrimeDialog() {
         lawsDialog = new Dialog(this);
-        lawsDialog.setContentView(R.layout.add_crime_dialog);
+        lawsDialog.setContentView(R.layout.add_laws_crime_dialog);
         lawsDialog.setCancelable(false);
         lawsDialog.show();
         lawsDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -126,7 +126,7 @@ public class DepAdminLawsActivity extends AppCompatActivity {
         });
     }
 
-    private void checkCrimeAlreadyExistOrNot(LawsModel lawsModel) {
+    private void checkCrimeAlreadyExistOrNot(LawsModel model) {
         lawsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             int count = 0;
             boolean check = false;
@@ -140,21 +140,23 @@ public class DepAdminLawsActivity extends AppCompatActivity {
 
                         count++;
 
-                        assert lawsModel != null;
-                        if (lawsModel.getCrimeType().equalsIgnoreCase(lawsModel.getCrimeType())) {
-                            lawsDialogProgressbar.setVisibility(View.INVISIBLE);
-                            Toast.makeText(DepAdminLawsActivity.this, "Crime type already exists. Please enter a different one", Toast.LENGTH_SHORT).show();
-                            crimeType.setError("Crime type exists. Please enter a different one");
-                            check = true;
-                            return;
-                        } else if (count == snapshot.getChildrenCount()) {
-                            if (!check) {
-                                addToDb(lawsModel);
+                        if (lawsModel != null) {
+
+                            if (model.getCrimeType().toLowerCase().equals(lawsModel.getCrimeType().toLowerCase())) {
+                                lawsDialogProgressbar.setVisibility(View.INVISIBLE);
+                                Toast.makeText(DepAdminLawsActivity.this, "Crime type already exists. Please enter a different one", Toast.LENGTH_SHORT).show();
+                                crimeType.setError("Crime type exists. Please enter a different one");
+                                check = true;
+                                return;
+                            } else if (count == snapshot.getChildrenCount()) {
+                                if (!check) {
+                                    addToDb(model);
+                                }
                             }
                         }
                     }
                 } else {
-                    addToDb(lawsModel);
+                    addToDb(model);
 
                 }
             }

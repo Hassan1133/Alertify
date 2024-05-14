@@ -1,5 +1,8 @@
 package com.example.alertify.models;
-public class DepAdminModel {
+
+import java.io.Serializable;
+
+public class DepAdminModel implements Serializable {
     private String depAdminId;
     private String depAdminUid;
     private String depAdminName;

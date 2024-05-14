@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.alertify.adapters.ViewPagerAdapter;
+import com.example.alertify.adapters.user.ViewPagerAdapter;
 import com.example.alertify.databinding.ActivityUserLoginSignupBinding;
 import com.example.alertify.fragments.user.UserLoginFragment;
 import com.example.alertify.fragments.user.UserSignupFragment;

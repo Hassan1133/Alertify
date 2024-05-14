@@ -1,4 +1,4 @@
-package com.example.alertify.adapters;
+package com.example.alertify.adapters.user;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

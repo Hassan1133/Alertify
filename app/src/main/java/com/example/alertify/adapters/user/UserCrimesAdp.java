@@ -1,4 +1,4 @@
-package com.example.alertify.adapters;
+package com.example.alertify.adapters.user;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,20 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.alertify.R;
-import com.example.alertify.models.CrimeLawsModel;
+import com.example.alertify.models.CrimesModel;
 
 import java.util.List;
 
-public class UserCrimeLawsAdp extends RecyclerView.Adapter<UserCrimeLawsAdp.Holder> {
+public class UserCrimesAdp extends RecyclerView.Adapter<UserCrimesAdp.Holder> {
 
     private final Context context;
 
-    private final List<CrimeLawsModel> crimesLawsList;
+    private final List<CrimesModel> crimesList;
 
-
-    public UserCrimeLawsAdp(Context context, List<CrimeLawsModel> crimesLawsList) {
+    public UserCrimesAdp(Context context, List<CrimesModel> crimes) {
         this.context = context;
-        this.crimesLawsList = crimesLawsList;
+        crimesList = crimes;
 
     }
 
@@ -32,7 +31,7 @@ public class UserCrimeLawsAdp extends RecyclerView.Adapter<UserCrimeLawsAdp.Hold
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.crime_laws_recycler_design, parent, false);
+        View view = inflater.inflate(R.layout.crimes_recycler_design, parent, false);
 
         return new Holder(view);
     }
@@ -40,28 +39,25 @@ public class UserCrimeLawsAdp extends RecyclerView.Adapter<UserCrimeLawsAdp.Hold
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
 
-        CrimeLawsModel crimesLawModel = crimesLawsList.get(position);
+        CrimesModel crimesModel = crimesList.get(position);
 
-
-        holder.sectionNo.setText(crimesLawModel.getSectionNumber());
-        holder.law.setText(crimesLawModel.getLaw());
-
+        holder.crime.setText(crimesModel.getCrimeType());
+        holder.definition.setText(crimesModel.getDefinition());
 
     }
 
     @Override
     public int getItemCount() {
-        return crimesLawsList.size();
+        return crimesList.size();
     }
 
     class Holder extends RecyclerView.ViewHolder {
 
-        private TextView sectionNo, law;
-
+        private TextView crime, definition;
         public Holder(@NonNull View itemView) {
             super(itemView);
-            sectionNo = itemView.findViewById(R.id.sectionNumber);
-            law = itemView.findViewById(R.id.law);
+            crime = itemView.findViewById(R.id.crime);
+            definition = itemView.findViewById(R.id.definition);
         }
     }
 }

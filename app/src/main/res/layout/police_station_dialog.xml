@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dep_admin_edit_dialog_shape"
+        tools:ignore="ScrollViewSize">
+
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/police_station_name"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/dialogPoliceStationName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/hint_color"
+            android:hint="@string/police_station_name_hint"
+            android:textColor="@color/hint_color"
+            android:textColorHint="@color/hint_color"
+            android:textCursorDrawable="@drawable/cursor_shape"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dialogPoliceStationName"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/police_station_location"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/dialogPoliceStationLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/location"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/hint_color"
+            android:enabled="false"
+            android:hint="@string/police_station_location"
+            android:paddingEnd="20dp"
+            android:textColor="@color/hint_color"
+            android:textColorHint="@color/hint_color"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/dialogAddPoliceStationLocationBtn"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_below="@+id/location"
+            android:layout_alignEnd="@+id/dialogPoliceStationLocation"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/baseline_add_location_24" />
+
+        <RelativeLayout
+            android:id="@+id/boundaryLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dialogPoliceStationLocation"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:id="@+id/boundaries"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/police_station_boundary"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/dialogAddPoliceStationBoundaryBtn"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/boundary" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/boundaryDataLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/boundaryLayout"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/boundry_layout_shape"
+            android:paddingBottom="5dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/boundariesRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/boundaryDataLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cancelBtn"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/app_color"
+                android:text="@string/cancel"
+                app:cornerRadius="5dp"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/okBtn"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:backgroundTint="@color/app_color"
+                android:text="@string/ok"
+                app:cornerRadius="5dp"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>

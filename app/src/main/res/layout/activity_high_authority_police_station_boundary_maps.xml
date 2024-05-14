@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.high_authority.HighAuthorityPoliceStationBoundaryMapsActivity">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/police_station_boundary_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/boundaryMapSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/search_view"
+        android:elevation="3dp"
+        android:theme="@style/search_view_style"
+        app:iconifiedByDefault="false"
+        app:queryHint="@string/search" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/drawPolygonBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/boundaryMapSearchView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/lighter_grey"
+        android:src="@drawable/boundary"
+        app:borderWidth="0dp"
+        app:fabSize="mini"
+        app:tint="@color/hint_color" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/donePolygonBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/drawPolygonBtn"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/lighter_grey"
+        android:src="@drawable/done"
+        app:borderWidth="0dp"
+        app:fabSize="mini"
+        app:maxImageSize="16dp"
+        app:tint="@color/hint_color" />
+
+</RelativeLayout>
+

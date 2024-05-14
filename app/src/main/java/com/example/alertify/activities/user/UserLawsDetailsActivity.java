@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.alertify.adapters.UserCrimeLawsAdp;
+import com.example.alertify.adapters.user.UserCrimeLawsAdp;
 import com.example.alertify.databinding.ActivityUserLawsDetailsBinding;
 import com.example.alertify.models.CrimeLawsModel;
 import com.example.alertify.models.LawsModel;

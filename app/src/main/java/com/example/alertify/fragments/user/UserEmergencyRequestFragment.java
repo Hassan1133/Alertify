@@ -1,20 +1,19 @@
 package com.example.alertify.fragments.user;
 
-import static android.content.Context.MODE_PRIVATE;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
@@ -71,8 +70,16 @@ public class UserEmergencyRequestFragment extends Fragment implements View.OnCli
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentUserEmergencyRequestBinding.inflate(inflater, container, false);
-        init();
         return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (isAdded())
+        {
+            init();
+        }
     }
 
     private void init() {
@@ -88,6 +95,11 @@ public class UserEmergencyRequestFragment extends Fragment implements View.OnCli
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.emergencyBtn) {
+
+            if(!isAdded())
+            {
+                return;
+            }
             new MaterialAlertDialogBuilder(requireContext()).setMessage("Are you sure you want to send emergency request?").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -185,7 +197,7 @@ public class UserEmergencyRequestFragment extends Fragment implements View.OnCli
         return latLngList;
     }
 
-    void sendNotification(String token) {
+    void sendNotification(String token, String depAdminId) {
 
         try {
             JSONObject jsonObject = new JSONObject();
@@ -193,7 +205,8 @@ public class UserEmergencyRequestFragment extends Fragment implements View.OnCli
             JSONObject dataObj = new JSONObject();
             dataObj.put("title", appSharedPreferences.getString("userName"));
             dataObj.put("body", "needs help right now.");
-            dataObj.put("type", "emergency");
+            dataObj.put("type", "userEmergency");
+            dataObj.put("id", depAdminId);
 
             jsonObject.put("data", dataObj);
             jsonObject.put("to", token);
@@ -201,7 +214,7 @@ public class UserEmergencyRequestFragment extends Fragment implements View.OnCli
             callApi(jsonObject);
 
         } catch (Exception e) {
-
+            Log.d("UserComplaintsFragment", "sendNotification: " + e);
         }
     }
 
@@ -235,13 +248,11 @@ public class UserEmergencyRequestFragment extends Fragment implements View.OnCli
     private void setEmergencyRequestToModel(String depAdminId) {
         if (appropriatePoliceStationName != null && userCurrentLatitude != 0 && userCurrentLongitude != 0) {
 
-            SharedPreferences userData = getActivity().getSharedPreferences("userData", MODE_PRIVATE);
-
             EmergencyRequestModel emergencyServiceModel = new EmergencyRequestModel();
             emergencyServiceModel.setRequestId(emergencyRequestsRef.push().getKey());
             emergencyServiceModel.setRequestStatus("unseen");
             emergencyServiceModel.setRequestDateTime(getCurrentDateTime());
-            emergencyServiceModel.setUserId(userData.getString("id", ""));
+            emergencyServiceModel.setUserId(appSharedPreferences.getString("userId"));
             emergencyServiceModel.setPoliceStation(appropriatePoliceStationName);
             emergencyServiceModel.setUserCurrentLatitude(userCurrentLatitude);
             emergencyServiceModel.setUserCurrentLongitude(userCurrentLongitude);
@@ -286,7 +297,6 @@ public class UserEmergencyRequestFragment extends Fragment implements View.OnCli
                     depAdminRef.child(depAdminId).child("emergencyRequestList").setValue(requestList).addOnSuccessListener(aVoid -> {
 
                         getDepAdminFCMToken(depAdminId);
-                        Toast.makeText(getActivity(), "Emergency Service request sent", Toast.LENGTH_SHORT).show();
 
                     }).addOnFailureListener(e -> {
                         // Handle failure
@@ -309,7 +319,8 @@ public class UserEmergencyRequestFragment extends Fragment implements View.OnCli
         depAdminRef.child(depAdminId).child("depAdminFCMToken").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                sendNotification(task.getResult().getValue().toString());
+                sendNotification(task.getResult().getValue().toString(), depAdminId);
+                Toast.makeText(getActivity(), "Emergency Service request sent", Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

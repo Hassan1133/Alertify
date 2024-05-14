@@ -1,4 +1,4 @@
-package com.example.alertify.adapters;
+package com.example.alertify.adapters.user;
 
 import android.content.Context;
 import android.content.Intent;

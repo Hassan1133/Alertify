@@ -4,14 +4,13 @@ import static com.example.alertify.constants.Constants.ALERTIFY_CRIMES_REF;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.alertify.adapters.UserCrimesAdp;
+import com.example.alertify.adapters.user.UserCrimesAdp;
 import com.example.alertify.databinding.ActivityUserCrimesBinding;
 import com.example.alertify.models.CrimesModel;
 import com.google.firebase.database.DataSnapshot;

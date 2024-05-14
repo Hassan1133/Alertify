@@ -123,7 +123,7 @@ public class UserMainActivity extends AppCompatActivity implements View.OnClickL
                         drawer.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.home:
-                        loadFragment(new UserComplaintsFragment());
+                        bottom_navigation.setSelectedItemId(R.id.complaints);
                         drawer.closeDrawer(GravityCompat.START);
                         break;
 

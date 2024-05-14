@@ -50,9 +50,18 @@ public class UserSignupFragment extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentUserSignupBinding.inflate(inflater, container, false);
-        init();
         return binding.getRoot();
 
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if(isAdded())
+        {
+            init();
+        }
     }
 
     private void init() // method for widgets or variables initialization
@@ -80,6 +89,11 @@ public class UserSignupFragment extends Fragment implements View.OnClickListener
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if(!isAdded())
+                {
+                    return;
+                }
 
                 if (snapshot.exists()) {
 
@@ -170,6 +184,11 @@ public class UserSignupFragment extends Fragment implements View.OnClickListener
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
+
+                            if(!isAdded())
+                            {
+                                return;
+                            }
                             LoadingDialog.hideLoadingDialog(loadingDialog);
                             Toast.makeText(getContext(), "Signed up Successfully", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getActivity(), UserLoginSignupActivity.class);

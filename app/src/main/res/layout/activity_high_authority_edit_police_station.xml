@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/app_color"
+        tools:ignore="ScrollViewSize">
+
+        <TextView
+            android:id="@+id/txt_alertify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/noto_serif_bold"
+            android:text="@string/alertify_heading"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/txt_alertify"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/login_signup_shape"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="50dp"
+                android:text="@string/police_station_name"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editPoliceStationName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="@color/hint_color"
+                android:hint="@string/police_station_name_hint"
+                android:textColor="@color/hint_color"
+                android:textColorHint="@color/hint_color"
+                android:textCursorDrawable="@drawable/cursor_shape"
+                android:textSize="16sp"
+
+                />
+
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editPoliceStationName"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/police_station_location"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editPoliceStationLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/location"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="@color/hint_color"
+                android:editable="false"
+                android:hint="@string/police_station_location"
+                android:textColor="@color/hint_color"
+                android:textColorHint="@color/hint_color"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/editAddPoliceStationLocationBtn"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:layout_below="@+id/location"
+                android:layout_alignEnd="@+id/editPoliceStationLocation"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/baseline_add_location_24" />
+
+            <RelativeLayout
+                android:id="@+id/boundaryLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editPoliceStationLocation"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp">
+
+                <TextView
+                    android:id="@+id/boundaries"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/police_station_boundary"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/editAddPoliceStationBoundaryBtn"
+                    android:layout_width="30sp"
+                    android:layout_height="30sp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/boundary" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/boundaryDataLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/boundaryLayout"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/boundry_layout_shape"
+                android:paddingBottom="5dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/editPoliceStationBoundariesRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/editPoliceStationUpdateBtn"
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:layout_below="@id/boundaryDataLayout"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="@color/app_color"
+                android:text="update"
+                android:textColor="@color/white"
+                app:cornerRadius="25dp" />
+
+        </RelativeLayout>
+
+        <!--    end of tabsLayout-->
+
+    </RelativeLayout>
+
+</ScrollView>

@@ -25,7 +25,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
-            android:hint="Department Admin Name"
+            android:hint="user name"
             android:textColorHint="@color/hint_color"
             app:boxStrokeColor="@color/hint_color"
             app:hintTextColor="@color/hint_color">

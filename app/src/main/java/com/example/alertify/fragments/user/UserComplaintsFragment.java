@@ -1,7 +1,5 @@
 package com.example.alertify.fragments.user;
 
-import static android.content.Context.MODE_PRIVATE;
-
 import static com.example.alertify.constants.Constants.ALERTIFY_CRIMES_REF;
 import static com.example.alertify.constants.Constants.ALERTIFY_DEP_ADMIN_REF;
 import static com.example.alertify.constants.Constants.ALERTIFY_POLICE_STATIONS_REF;
@@ -13,7 +11,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -38,8 +35,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.alertify.R;
 import com.example.alertify.activities.common.MapsActivity;
-import com.example.alertify.adapters.DropDownAdapter;
-import com.example.alertify.adapters.UserComplaintsAdapter;
+import com.example.alertify.adapters.user.DropDownAdapter;
+import com.example.alertify.adapters.user.UserComplaintsAdapter;
 import com.example.alertify.databinding.ComplaintDialogBinding;
 import com.example.alertify.databinding.UserComplaintsFragmentBinding;
 import com.example.alertify.interfaces.RecognitionCallback;
@@ -115,8 +112,6 @@ public class UserComplaintsFragment extends Fragment implements View.OnClickList
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         binding = UserComplaintsFragmentBinding.inflate(inflater, container, false);
-        init();
-        Log.d("TAGCheck", "onCreateView: run");
         return binding.getRoot();
     }
 
@@ -143,6 +138,20 @@ public class UserComplaintsFragment extends Fragment implements View.OnClickList
         depAdminRef = FirebaseDatabase.getInstance().getReference(ALERTIFY_DEP_ADMIN_REF);
 
         appSharedPreferences = new AppSharedPreferences(requireActivity());
+
+        fetchComplaintsData();
+        binding.searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                search(newText);
+                return true;
+            }
+        });
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -164,23 +173,9 @@ public class UserComplaintsFragment extends Fragment implements View.OnClickList
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (!isAdded()) {
-            return;
+        if (isAdded()) {
+            init();
         }
-
-        fetchComplaintsData();
-        binding.searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                search(newText);
-                return true;
-            }
-        });
     }
 
     private void search(String newText) {
@@ -630,7 +625,7 @@ public class UserComplaintsFragment extends Fragment implements View.OnClickList
         depAdminRef.child(depAdminId).child("depAdminFCMToken").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                sendNotification(task.getResult().getValue().toString());
+                sendNotification(task.getResult().getValue().toString(), depAdminId);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -640,7 +635,7 @@ public class UserComplaintsFragment extends Fragment implements View.OnClickList
         });
     }
 
-    void sendNotification(String token) {
+    void sendNotification(String token, String depAdminId) {
 
         try {
             JSONObject jsonObject = new JSONObject();
@@ -648,7 +643,8 @@ public class UserComplaintsFragment extends Fragment implements View.OnClickList
             JSONObject dataObj = new JSONObject();
             dataObj.put("title", appSharedPreferences.getString("userName"));
             dataObj.put("body", "registered a complaint");
-            dataObj.put("type", "complaint");
+            dataObj.put("type", "userComplaint");
+            dataObj.put("id", depAdminId);
 
             jsonObject.put("data", dataObj);
             jsonObject.put("to", token);
@@ -656,7 +652,7 @@ public class UserComplaintsFragment extends Fragment implements View.OnClickList
             callApi(jsonObject);
 
         } catch (Exception e) {
-
+            Log.d("UserComplaintsFragment", "sendNotification: " + e);
         }
     }
 
@@ -738,7 +734,9 @@ public class UserComplaintsFragment extends Fragment implements View.OnClickList
     }
 
     private void setCrimeTypesToRecycler(ArrayList<String> list) {
-        complaintDialogBinding.crimeType.setAdapter(new DropDownAdapter(getActivity(), list));
+        if (isAdded()) {
+            complaintDialogBinding.crimeType.setAdapter(new DropDownAdapter(getActivity(), list));
+        }
     }
     private final ActivityResultLauncher<Intent> mapsActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
@@ -808,6 +806,10 @@ public class UserComplaintsFragment extends Fragment implements View.OnClickList
 
 
     private void fetchComplaintsData() {
+
+        if (!isAdded()) {
+            return;
+        }
 
         binding.complaintsProgressbar.setVisibility(View.VISIBLE);
         complaints.clear();
@@ -879,6 +881,10 @@ public class UserComplaintsFragment extends Fragment implements View.OnClickList
         return -1;
     }
     private void setDataToRecycler(List<ComplaintModel> complaints) {
+
+        if (!isAdded()) {
+            return;
+        }
         complaintsAdapter = new UserComplaintsAdapter(getActivity(), complaints);
         binding.complaintsRecycler.setAdapter(complaintsAdapter);
         binding.complaintsProgressbar.setVisibility(View.GONE);

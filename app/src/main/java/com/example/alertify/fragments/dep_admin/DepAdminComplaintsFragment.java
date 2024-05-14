@@ -61,8 +61,6 @@ public class DepAdminComplaintsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         binding = DepAdminComplaintsFragmentBinding.inflate(inflater, container, false);
-        init();
-        Log.d("TAGDataCri", "onCreateView Complaints");
         return binding.getRoot();
     }
 
@@ -73,14 +71,7 @@ public class DepAdminComplaintsFragment extends Fragment {
         complaints = new ArrayList<ComplaintModel>();
         appSharedPreferences = new AppSharedPreferences(requireActivity());
         binding.complaintsRecycler.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-    }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        if (!isAdded()) {
-            return;
-        }
         fetchComplaintsData();
         binding.searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
@@ -96,6 +87,14 @@ public class DepAdminComplaintsFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (isAdded()) {
+            init();
+        }
+    }
+
     private void search(String newText) {
         ArrayList<ComplaintModel> searchList = new ArrayList<>();
         for (ComplaintModel i : complaints) {
@@ -107,6 +106,11 @@ public class DepAdminComplaintsFragment extends Fragment {
     }
 
     private void fetchComplaintsData() {
+
+        if (!isAdded()) {
+            return;
+        }
+
         binding.complaintsProgressbar.setVisibility(View.VISIBLE);
         complaints.clear();
 
@@ -229,19 +233,18 @@ public class DepAdminComplaintsFragment extends Fragment {
     private void sendPendingComplaintsToHighAuthority(List<String> updatedComplaintsList, List<String> pendingComplaintList, String depAdminHighAuthorityId) {
         highAuthorityRef.child(depAdminHighAuthorityId).child("complaintList").setValue(updatedComplaintsList)
                 .addOnSuccessListener(aVoid -> {
-                    updateComplaintSendHighAuthorityStatus(pendingComplaintList);
-                    getHighAuthorityFCMToken(depAdminHighAuthorityId);
+                    updateComplaintSendHighAuthorityStatus(pendingComplaintList, depAdminHighAuthorityId);
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(requireActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 
-    private void updateComplaintSendHighAuthorityStatus(List<String> pendingComplaintList) {
+    private void updateComplaintSendHighAuthorityStatus(List<String> pendingComplaintList, String depAdminHighAuthorityId) {
         for (String complaint : pendingComplaintList) {;
             complaintsRef.child(complaint).child("sendToHighAuthority").setValue(true)
                     .addOnSuccessListener(aVoid -> {
-                        // Success
+                        getHighAuthorityFCMToken(depAdminHighAuthorityId);
                     })
                     .addOnFailureListener(e -> {
                         Toast.makeText(requireActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -253,7 +256,7 @@ public class DepAdminComplaintsFragment extends Fragment {
         highAuthorityRef.child(depAdminHighAuthorityId).child("highAuthorityFCMToken").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                sendNotification(task.getResult().getValue().toString());
+                sendNotification(task.getResult().getValue().toString(), depAdminHighAuthorityId);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -263,21 +266,22 @@ public class DepAdminComplaintsFragment extends Fragment {
         });
     }
 
-    private void sendNotification(String token) {
+    private void sendNotification(String token, String depAdminHighAuthorityId) {
         try {
             JSONObject jsonObject = new JSONObject();
 
             JSONObject dataObj = new JSONObject();
             dataObj.put("title", appSharedPreferences.getString("depAdminName"));
             dataObj.put("body", "has pending complaints.");
-
+            dataObj.put("type", "depAdminComplaints");
+            dataObj.put("id", depAdminHighAuthorityId);
             jsonObject.put("data", dataObj);
             jsonObject.put("to", token);
 
             callApi(jsonObject);
 
         } catch (Exception e) {
-
+            Log.d("DepAdminComplaintsFragment", "sendNotification: "+e);
         }
     }
 
@@ -305,6 +309,11 @@ public class DepAdminComplaintsFragment extends Fragment {
     }
 
     private void setDataToRecycler(List<ComplaintModel> complaints) {
+
+        if (!isAdded()) {
+            return;
+        }
+
         DepAdminComplaintsAdp complaintsAdapter = new DepAdminComplaintsAdp(getActivity(), complaints);
         binding.complaintsRecycler.setAdapter(complaintsAdapter);
         binding.complaintsProgressbar.setVisibility(View.GONE);

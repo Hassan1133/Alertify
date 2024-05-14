@@ -6,7 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.READ_MEDIA_*" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -22,11 +23,20 @@
         android:theme="@style/Theme.Alertify"
         tools:targetApi="31">
         <activity
+            android:name=".activities.common.StartUpActivity"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activities.user.UserLawsDetailsActivity"
-            android:exported="false" />
+            android:configChanges="orientation"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.user.UserCriminalDetailActivity"
-            android:exported="false" />
+            android:configChanges="orientation"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.user.UserComplaintsDetailsActivity"
             android:configChanges="orientation"
@@ -73,10 +83,11 @@
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activities.dep_admin.DepAdminLawsDetailsActivity"
-            android:exported="false" />
+            android:configChanges="orientation"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.dep_admin.DepAdminSeeAnalyticsActivity"
             android:configChanges="orientation"
@@ -117,22 +128,54 @@
             android:configChanges="orientation"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activities.dep_admin.DepAdminLoginActivity"
             android:configChanges="orientation"
-            android:exported="true"
-            android:screenOrientation="portrait" >
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.dep_admin.DepAdminMainActivity"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.high_authority.HighAuthorityComplaintsDetailsActivity"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.high_authority.HighAuthoritySeeAnalyticsActivity"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.high_authority.HighAuthorityPoliceStationBoundaryMapsActivity"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:label="@string/title_activity_police_station_boundary_maps"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.high_authority.HighAuthorityEditProfileActivity"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.high_authority.HighAuthorityEditDepAdminActivity"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.high_authority.HighAuthorityEditPoliceStationActivity"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.high_authority.HighAuthorityLoginSignupActivity"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.high_authority.HighAuthorityMainActivity"
             android:configChanges="orientation"
             android:exported="false"
             android:screenOrientation="portrait" />
@@ -142,20 +185,22 @@
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
-<!--        <service-->
-<!--            android:name=".services.FCM_Notification_Service"-->
-<!--            android:exported="false">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="com.google.firebase.MESSAGING_EVENT" />-->
-<!--            </intent-filter>-->
-<!--        </service>-->
+        <service
+            android:name=".services.FCM_Notification_Service"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
     </application>
 

@@ -2,6 +2,7 @@ package com.example.alertify.fragments.user;
 
 import static com.example.alertify.constants.Constants.USERS_REF;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,8 +51,16 @@ public class UserLoginFragment extends Fragment implements View.OnClickListener 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentUserLoginBinding.inflate(inflater, container, false);
-        init();
         return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (isAdded()) {
+            init();
+        }
     }
 
     private void init() {
@@ -66,6 +75,7 @@ public class UserLoginFragment extends Fragment implements View.OnClickListener 
         appSharedPreferences = new AppSharedPreferences(requireActivity());
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -85,6 +95,11 @@ public class UserLoginFragment extends Fragment implements View.OnClickListener 
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (!isAdded()) {
+                    return;
+                }
+
                 if (snapshot.exists()) {
                     for (DataSnapshot userSnapShot : snapshot.getChildren()) {
                         UserModel userModel = userSnapShot.getValue(UserModel.class);
@@ -157,6 +172,11 @@ public class UserLoginFragment extends Fragment implements View.OnClickListener 
     }
 
     private void goToMainActivity() {
+
+        if (!isAdded()) {
+            return;
+        }
+
         appSharedPreferences.put("userFlag", true);
         Intent intent = new Intent(getActivity(), UserMainActivity.class);
         startActivity(intent);
@@ -164,6 +184,10 @@ public class UserLoginFragment extends Fragment implements View.OnClickListener 
     }
 
     private void getProfileData() {
+
+        if (!isAdded()) {
+            return;
+        }
 
         if (user != null && !user.getId().isEmpty()) {
             appSharedPreferences.put("userId", user.getId());

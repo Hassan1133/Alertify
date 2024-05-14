@@ -71,8 +71,15 @@ public class UserFindPoliceStationFragment extends Fragment implements OnMapRead
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentUserFindPoliceStationBinding.inflate(inflater, container, false);
-        init();
         return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (isAdded()) {
+            init();
+        }
     }
 
     private void init() {
@@ -181,6 +188,12 @@ public class UserFindPoliceStationFragment extends Fragment implements OnMapRead
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+
+                if(!isAdded())
+                {
+                    return;
+                }
+
                 policeStations.clear();
 
                 if (snapshot.exists()) {
@@ -244,6 +257,10 @@ public class UserFindPoliceStationFragment extends Fragment implements OnMapRead
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.startDirectionBtn) {
+            if(!isAdded())
+            {
+                return;
+            }
             if (userLatitude != 0 && userLongitude != 0 && appropriatePoliceStationLatitude != 0 && appropriatePoliceStationLongitude != 0) {
                 getCurrentLocationForDirectionsAgain(appropriatePoliceStationLatitude, appropriatePoliceStationLongitude);
             } else {
