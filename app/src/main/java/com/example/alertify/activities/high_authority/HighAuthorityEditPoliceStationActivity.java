@@ -157,6 +157,7 @@ public class HighAuthorityEditPoliceStationActivity extends AppCompatActivity im
                 binding.editPoliceStationLocation.setText(result.getData().getStringExtra("address"));
                 selectedLatitude = result.getData().getDoubleExtra("latitude", 0);
                 selectedLongitude = result.getData().getDoubleExtra("longitude", 0);
+
             }
         }
     });

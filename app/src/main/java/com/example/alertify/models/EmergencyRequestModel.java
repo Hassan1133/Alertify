@@ -11,6 +11,15 @@ public class EmergencyRequestModel implements Serializable {
     private String requestDateTime;
     private double userCurrentLatitude;
     private double userCurrentLongitude;
+    private boolean forwarded;
+
+    public boolean isForwarded() {
+        return forwarded;
+    }
+
+    public void setForwarded(boolean forwarded) {
+        this.forwarded = forwarded;
+    }
 
     public String getRequestId() {
         return requestId;

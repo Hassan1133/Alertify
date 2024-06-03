@@ -22,5 +22,4 @@ public interface Constants {
     String FIR_REF = "FIR";
     String USERS_REF = "AlertifyUser";
     String USERS_COMPLAINTS_REF = "AlertifyUserComplaints";
-
 }

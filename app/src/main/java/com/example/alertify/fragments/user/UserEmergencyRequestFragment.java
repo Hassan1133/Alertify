@@ -256,6 +256,7 @@ public class UserEmergencyRequestFragment extends Fragment implements View.OnCli
             emergencyServiceModel.setPoliceStation(appropriatePoliceStationName);
             emergencyServiceModel.setUserCurrentLatitude(userCurrentLatitude);
             emergencyServiceModel.setUserCurrentLongitude(userCurrentLongitude);
+            emergencyServiceModel.setForwarded(false);
 
             addEmergencyRequestToDB(emergencyServiceModel, depAdminId);
         }
